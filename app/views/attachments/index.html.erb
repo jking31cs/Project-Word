@@ -1,0 +1,8 @@
+<h5> WASSUP <h5>
+<table>
+<% @attachments.each do |att| %>
+  <tr>
+    <td> <%= link_to "#{att.filename}", :controller => :attachments, :action => :show, :id => att.id %>
+  </tr>
+<% end %>
+</table>   

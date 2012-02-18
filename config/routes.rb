@@ -1,4 +1,4 @@
-ProjectWord::Application.routes.draw do
+DigitalWordProject::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -12,6 +12,8 @@ ProjectWord::Application.routes.draw do
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
+
+    resources :attachments
 
   # Sample resource route with options:
   #   resources :products do
