@@ -1,5 +1,10 @@
 <h1>Upload New Doc</h1>
 <%= form_tag({:action => "create"}, :multipart => true) do %>
-    <%= file_field_tag 'file' %>
+    <%= label_tag 'file', 'File:' %> <%= file_field_tag 'file' %> <br />
+    <%= label_tag 'title', 'Document title:' %> <%=text_field_tag 'title' %> <br />
+    <%= label_tag 'semester', 'Semester:' %> <%=select_tag 'semester', options_from_collection_for_select(@semesters, 'id', 'season') %><br />
+    <%= label_tag 'prof', 'Professor:' %> <%=text_field_tag 'prof' %> <br />
+    <%= label_tag 'course', 'Course:' %> <%=text_field_tag 'course' %> <br />
+    <%= label_tag 'type', 'Type of Document:' %> <%=select_tag 'type', options_from_collection_for_select(@types, 'id', 'doc_type') %> <br /> 
     <%= submit_tag %>
 <% end %>
