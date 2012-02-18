@@ -1,2 +1,8 @@
 <h1>Docs#index</h1>
-<p>Find me in app/views/docs/index.html.erb</p>
+<table>
+    <% @docs.each do |doc| %>
+    <tr>
+        <td> <%= link_to "#{doc.title}", :controller => :docs, :action => :show, :id => doc.id %> </td>
+    </tr>
+    <% end %>
+</table>
