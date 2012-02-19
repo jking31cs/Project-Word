@@ -1,5 +1,7 @@
 <h1>Docs#index</h1>
-
+<table>
+  <tr>
+  <td style="width: 30%">
 <div id="searchSection">
 <%= form_tag({:action => "search"}, :multipart => true) do %>
     <%= label_tag 'title', 'Document title:' %> <%=text_field_tag 'title' %> <br />
@@ -10,7 +12,8 @@
     <%= submit_tag %>
 <% end %>
 </div>
-
+  </td>
+  <td style="width: 70%">
 <div id="filesSection">
 <table>
     <% @docs.each do |doc| %>
@@ -18,5 +21,8 @@
         <td> <%= link_to "#{doc.title}", :controller => :docs, :action => :show, :id => doc.id %> </td>
     </tr>
     <% end %>
+</table>
+  <td>
+ </tr>
 </table>
 </div>
