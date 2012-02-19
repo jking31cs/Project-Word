@@ -1,4 +1,17 @@
 <h1>Docs#index</h1>
+
+<div id="searchSection">
+<%= form_tag({:action => "search"}, :multipart => true) do %>
+    <%= label_tag 'title', 'Document title:' %> <%=text_field_tag 'title' %> <br />
+    <%= label_tag 'semester', 'Semester:' %> <%=select_tag 'semester', options_from_collection_for_select(@semesters, 'id', 'season') %><br />
+    <%= label_tag 'prof', 'Professor:' %> <%=text_field_tag 'prof' %> <br />
+    <%= label_tag 'course', 'Course:' %> <%=text_field_tag 'course' %> <br />
+    <%= label_tag 'type', 'Type of Document:' %> <%=select_tag 'type', options_from_collection_for_select(@types, 'id', 'doc_type') %> <br />
+    <%= submit_tag %>
+<% end %>
+</div>
+
+<div id="filesSection">
 <table>
     <% @docs.each do |doc| %>
     <tr>
@@ -6,3 +19,4 @@
     </tr>
     <% end %>
 </table>
+</div>

@@ -4,9 +4,14 @@ class DocsController < ApplicationController
      @types = Type.all
   end
   def index
+     @semesters = Semester.all
+     @types = Type.all
      if (@docs.nil?) 
 	@docs = Doc.all
      end
+  end
+  def search
+     redirect_to :action => 'index'
   end
   def create      
         return if params[:file].blank?
