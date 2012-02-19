@@ -14,12 +14,15 @@ class DocsController < ApplicationController
         @doc.title = params[:title]
         @doc.semester = Semester.find(params[:semester])
         @doc.prof = params[:prof]
-#	course = Course.where(:title => params[:course])
- #       if (course.nil?)
-  #           course = Course.new(:title => params[:course])
-   #          course.save
-    #    end
-     #   @doc.course = course
+	@c = Course.where(:title => params[:course]).first
+        if (@c.nil?)
+            @c = Course.new(:title => params[:course])
+            @c.save
+            @c = Course.where(:title => params[:course])
+
+	end
+        logger.debug "The course is #{@c}"
+        @doc.course = @c
         @doc.type = Type.find(params[:type])
         if @doc.save
             flash[:notice] = "Thank you for your submission..."
