@@ -4,7 +4,9 @@ class DocsController < ApplicationController
      @types = Type.all
   end
   def index
-     @docs = Doc.all
+     if (@docs.nil?) 
+	@docs = Doc.all
+     end
   end
   def create      
         return if params[:file].blank?
