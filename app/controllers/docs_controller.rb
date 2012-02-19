@@ -10,6 +10,7 @@ class DocsController < ApplicationController
         return if params[:file].blank?
         @doc = Doc.new
         @doc.data = params[:file].read
+        @doc.content_type = params[:file].content_type
         @doc.title = params[:title]
         @doc.semester = Semester.find(params[:semester])
         @doc.prof = params[:prof]
@@ -30,6 +31,6 @@ class DocsController < ApplicationController
   end
   def show
     @doc = Doc.find(params[:id])
-    send_data @doc.data, :filename => @doc.title
+    send_data @doc.data, :filename => @doc.title, :type => @doc.content_type
   end
 end
