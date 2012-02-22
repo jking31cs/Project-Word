@@ -11,6 +11,18 @@ class DocsController < ApplicationController
      end
   end
   def search
+     query = 'SELECT * from Docs d
+     LEFT OUTER JOIN courses c
+                  ON d.course_id = c.id
+     LEFT OUTER JOIN semesters s
+                  ON d.semester_id = c.id
+               WHERE 1=1'
+
+     query += '  AND d.title = \'' + params[:title] + '\''
+    # if (params[:].blank?) 
+    #     query += '  AND d.title = ?'
+    # end
+     @docs = Doc.find_by_sql(query)
      redirect_to :action => 'index'
   end
   def create      
@@ -25,13 +37,14 @@ class DocsController < ApplicationController
         if (@c.nil?)
             @c = Course.new(:title => params[:course])
             @c.save
-            @c = Course.where(:title => params[:course])
+            @c = Course.where(:title => params[:course]).first
 
 	end
         logger.debug "The course is #{@c}"
         @doc.course = @c
         @doc.type = Type.find(params[:type])
         if @doc.save
+            @doc.save_file
             flash[:notice] = "Thank you for your submission..."
             redirect_to :action => "index"
         else

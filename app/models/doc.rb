@@ -30,4 +30,18 @@ class Doc < ActiveRecord::Base
    def course
         return Course.find(self.course_id)
    end
+
+   def save_file
+        dir = Dir.getwd
+        Dir.chdir("public/files")
+        if (!Dir.exists?(self.course.title))
+            Dir.mkdir(self.course.title)
+        end
+        Dir.chdir(self.course.title)
+        File.open(self.title + ".pdf", 'wb') { |file|
+            file << self.data
+        }
+       Dir.chdir(dir)
+        
+   end
 end
