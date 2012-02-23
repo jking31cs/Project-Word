@@ -27,11 +27,11 @@ class Doc < ActiveRecord::Base
         self.course_id = course.id
     end
 
-   def course
+    def course
         return Course.find(self.course_id)
-   end
+    end
 
-   def save_file
+    def save_file(data)
         dir = Dir.getwd
         Dir.chdir("public/files")
         if (!Dir.exists?(self.course.title))
@@ -39,9 +39,23 @@ class Doc < ActiveRecord::Base
         end
         Dir.chdir(self.course.title)
         File.open(self.title + ".pdf", 'wb') { |file|
-            file << self.data
+            file << data
+            self.data_path = file.path
         }
-       Dir.chdir(dir)
-        
-   end
+        Dir.chdir(dir)
+        return self.save
+    end
+
+    def data
+        dir = Dir.getwd
+        Dir.chdir("public/files")
+        if (!Dir.exists?(self.course.title))
+            Dir.mkdir(self.course.title)
+        end
+        Dir.chdir(self.course.title)
+        File.open(self.title + ".pdf", 'rb') { |file|
+            Dir.chdir(dir)
+            return file.read
+        }
+    end
 end
