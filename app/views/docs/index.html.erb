@@ -1,24 +1,37 @@
-<h1>Docs#index</h1>
+<style type="text/css">
+    div#searchSection {
+	border: 3px solid black;
+    }
+</style>
+
 <table>
   <tr>
   <td style="width: 30%">
-<div id="searchSection">
+<div id="searchSection" align="left">
+<h4> Search Form </h4>
 <%= form_tag({:action => "search"}, :multipart => true) do %>
     <%= label_tag 'title', 'Document title:' %> <%=text_field_tag 'title' %> <br />
     <%= label_tag 'semester', 'Semester:' %> <%=select_tag 'semester', options_from_collection_for_select(@semesters, 'id', 'season') %><br />
     <%= label_tag 'prof', 'Professor:' %> <%=text_field_tag 'prof' %> <br />
     <%= label_tag 'course', 'Course:' %> <%=text_field_tag 'course' %> <br />
     <%= label_tag 'type', 'Type of Document:' %> <%=select_tag 'type', options_from_collection_for_select(@types, 'id', 'doc_type') %> <br />
-    <%= submit_tag %>
+    <%= submit_tag 'Search'%>
 <% end %>
 </div>
   </td>
-  <td style="width: 70%">
-<div id="filesSection">
+  <td style="width: 70%; vertical-align: top;">
+<div id="filesSection" align="center">
 <table>
     <% @docs.each do |doc| %>
+    <th> Document </th>
+    <th> Course </th>
+    <th> Professor </th>
+    <th> Semester </th>
     <tr>
         <td> <%= link_to "#{doc.title}", :controller => :docs, :action => :show, :id => doc.id %> </td>
+	<td> <%= doc.course.title %> </td>
+        <td> <%= doc.prof %> </td>
+        <td> <%= doc.semester.season + " " + doc.semester.year.to_s() %> </td>
     </tr>
     <% end %>
 </table>

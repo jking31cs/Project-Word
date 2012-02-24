@@ -1,4 +1,4 @@
-<h1>Upload New Doc</h1>
+<div align="left">
 <%= form_tag({:action => "create"}, :multipart => true) do %>
     <%= label_tag 'file', 'File:' %> <%= file_field_tag 'file' %> <br />
     <%= label_tag 'title', 'Document title:' %> <%=text_field_tag 'title' %> <br />
@@ -8,3 +8,4 @@
     <%= label_tag 'type', 'Type of Document:' %> <%=select_tag 'type', options_from_collection_for_select(@types, 'id', 'doc_type') %> <br /> 
     <%= submit_tag %>
 <% end %>
+</div>

@@ -1,14 +1,28 @@
 <!DOCTYPE html>
+
+<style type:"text/css>
+    div#newUpload {
+        float: right;
+	position: relative;
+	top: -50px;
+	right: 30px;
+    }
+</style>
+
 <html>
 <head>
-  <title>DigitalWordProject</title>
+  <title>Digital Word Project</title>
   <%= stylesheet_link_tag    "application" %>
+  <%= stylesheet_link_tag    "blueprint/screen" %>
+  <%= stylesheet_link_tag    "blueprint/print" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<h1> Project Brometheus </h1>
+<div id="newUpload">
+<%= link_to 'Upload New File', :controller => :docs, :action => :new %>
+</div>
 <%= yield %>
-
 </body>
 </html>
