@@ -22,13 +22,13 @@
   <td style="width: 70%; vertical-align: top;">
 <div id="filesSection" align="center">
 <table>
-    <% @docs.each do |doc| %>
     <th> Document </th>
     <th> Course </th>
     <th> Professor </th>
     <th> Semester </th>
+    <% @docs.each do |doc| %>
     <tr>
-        <td> <%= link_to "#{doc.title}", :controller => :docs, :action => :show, :id => doc.id %> </td>
+        <td> <%= link_to doc.title, :controller => :docs, :action => :show, :id => doc.id %> </td>
 	<td> <%= doc.course.title %> </td>
         <td> <%= doc.prof %> </td>
         <td> <%= doc.semester.season + " " + doc.semester.year.to_s() %> </td>

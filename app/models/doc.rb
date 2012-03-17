@@ -31,6 +31,16 @@ class Doc < ActiveRecord::Base
         return Course.find(self.course_id)
     end
 
+    def self.search(title, semester, prof, course)
+        title = title + "%"
+        prof = prof + "%"
+        if course.nil?
+            return Doc.where("title like ? AND prof like ? AND semester_id = ?", title, prof, semester.id).all
+        end
+        return Doc.where("title like ? AND prof like ? AND course_id = ? AND semester_id = ?", title, prof, course.id, semester.id).all
+        
+    end
+
     def save_file(data)
         dir = Dir.getwd
         Dir.chdir("public/files")

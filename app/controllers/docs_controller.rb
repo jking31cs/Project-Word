@@ -6,12 +6,17 @@ class DocsController < ApplicationController
   def index
      @semesters = Semester.all
      @types = Type.all
+     @docs = session[:docs]
      if (@docs.nil?) 
 	@docs = Doc.all
      end
+     session[:docs] = Doc.all
   end
   def search
-     @docs = Doc.find_by_sql(query)
+     course = Course.where(:title => params[:course]).first
+     semester = Semester.find(params[:semester])
+     @docs = Doc.search(params[:title], semester, params[:prof], course)
+     session[:docs] = @docs
      redirect_to :action => 'index'
   end
   def create      
